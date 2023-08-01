@@ -189,6 +189,7 @@
 
                 <li class="mt-0.5 w-full">
                     <Link
+                        as="button"
                         method="post"
                         class="dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
                         :href="route('logout')"

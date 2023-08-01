@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Unit\Store;
+use App\Http\Requests\Unit\Update;
+use App\Http\Requests\UnitRequest;
 use Illuminate\Http\Request;
 use App\Models\Unit;
+use Illuminate\Mail\Message;
 
 class UnitsController extends Controller
 {
@@ -12,7 +16,7 @@ class UnitsController extends Controller
      */
     public function index()
     {
-        $units = Unit::all();
+        $units = Unit::orderBy('updated_at', 'DESC')->get();
 
         return inertia('Units/Index', [
             'units' => $units
@@ -24,15 +28,20 @@ class UnitsController extends Controller
      */
     public function create()
     {
-        dd('create');
+        return inertia('Units/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Store $request)
     {
-        //
+        $data = $request->validated();
+        Unit::create($data);
+
+        return redirect(route('dashboard.units.index'))->with([
+            'message' => 'Data Successfully Created!'
+        ]);
     }
 
     /**
@@ -46,24 +55,35 @@ class UnitsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Unit $unit)
     {
-        //
+        return inertia('Units/Edit', [
+            'unit' => $unit
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Update $request, Unit $unit)
     {
-        //
+
+        $unit->update($request->all());
+
+        return redirect(route('dashboard.units.index'))->with([
+            'message' => 'Data Successfully Created!'
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Unit $unit)
     {
-        //
+        $unit->delete();
+
+        return redirect(route('dashboard.units.index'))->with([
+            'message' => 'data deleted!'
+        ]);
     }
 }
