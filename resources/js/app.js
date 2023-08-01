@@ -1,5 +1,12 @@
 import './bootstrap';
 import '../css/app.css';
+import '../../public/assets/css/nucleo-icons.css'
+import '../../public/assets/css/nucleo-svg.css'
+import '../../public/assets/css/argon-dashboard-tailwind.css'
+
+import 'https://unpkg.com/@popperjs/core@2'
+import 'https://kit.fontawesome.com/42d5adcbca.js'
+
 
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
