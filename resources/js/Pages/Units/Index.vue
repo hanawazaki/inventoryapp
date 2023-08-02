@@ -11,8 +11,22 @@
                         <h6 class="dark:text-white">Units table</h6>
                     </div>
                     <div class="flex-auto px-0 pt-0 pb-2">
-                        <div class="p-0 overflow-x-auto">
-                            <div class="flex justify-end">
+                        <div class="p-6 overflow-x-auto">
+                            <div class="flex justify-between h-10">
+                                <div
+                                    class="relative flex items-stretch transition-all rounded-lg ease"
+                                >
+                                    <span
+                                        class="text-sm ease leading-5.6 absolute z-50 -ml-px flex h-full items-center whitespace-nowrap rounded-lg rounded-tr-none rounded-br-none border border-r-0 border-transparent bg-transparent py-2 px-2.5 text-center font-normal text-slate-500 transition-all"
+                                    >
+                                        <i class="fas fa-search"></i>
+                                    </span>
+                                    <input
+                                        type="text"
+                                        class="pl-9 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid border-gray-300 dark:bg-slate-850 dark:text-white bg-white bg-clip-padding py-2 pr-3 text-gray-700 transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none focus:transition-shadow"
+                                        placeholder="Type here..."
+                                    />
+                                </div>
                                 <Link :href="route('dashboard.units.create')">
                                     <Button type="button" variant="bg-blue-500"
                                         >Create new</Button
@@ -95,29 +109,12 @@
                             </table>
                         </div>
                     </div>
-                    <nav v-if="items.last_page > 1">
-                        <ul class="pagination">
-                            <li v-if="items.current_page > 1">
-                                <a @click="fetchUnits(items.current_page - 1)"
-                                    >Previous</a
-                                >
-                            </li>
-                            <li
-                                v-for="page in items.last_page"
-                                :key="page"
-                                :class="{
-                                    active: page === items.current_page,
-                                }"
-                            >
-                                <a @click="fetchUnits(page)">{{ page }}</a>
-                            </li>
-                            <li v-if="items.current_page < items.last_page">
-                                <a @click="fetchUnits(items.current_page + 1)"
-                                    >Next</a
-                                >
-                            </li>
-                        </ul>
-                    </nav>
+
+                    <Pagination
+                        :items="items"
+                        v-model:current-page="props.units.current_page"
+                        @update:current-page="fetchUnits"
+                    />
                 </div>
             </div>
         </div>
@@ -127,29 +124,25 @@
 <script setup>
 import Authenticated from "../../Layouts/Authenticated/Index.vue";
 import Button from "@/Components/Button.vue";
-import { Link, usePage, router } from "@inertiajs/vue3";
+import Pagination from "@/Components/Pagination.vue";
+import { Link, usePage, router, useForm } from "@inertiajs/vue3";
 import { ref, watch } from "vue";
 
 const { props } = usePage();
 const items = ref(props.units);
 
-// const props = defineProps({
-//     units: {
-//         type: Array,
-//         require: true,
-//     },
-// });
-
-watch(
-    () => props,
-    (newItems) => {
-        items.value = newItems;
-    }
-);
+// watch(
+//     () => props,
+//     (newItems) => {
+//         items.value = newItems;
+//     }
+// );
 
 function fetchUnits(page) {
     router.visit(`/units?page=${page}`);
 }
+
+const form = useForm({});
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>
