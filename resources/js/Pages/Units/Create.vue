@@ -32,6 +32,9 @@
                                                     class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"
                                                 />
                                             </div>
+                                            <InputError
+                                                :message="form.errors.name"
+                                            />
                                         </div>
                                     </div>
                                     <Button type="submit">Save</Button>
@@ -48,6 +51,7 @@
 <script setup>
 import Authenticated from "../../Layouts/Authenticated/Index.vue";
 import Button from "@/Components/Button.vue";
+import InputError from "@/Components/InputError.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 
 const form = useForm({

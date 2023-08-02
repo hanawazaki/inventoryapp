@@ -14,10 +14,19 @@ class UnitsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $units = Unit::orderBy('updated_at', 'DESC')->get();
+        // $units = Unit::orderBy('updated_at', 'DESC')->get();
 
+        // return inertia('Units/Index', [
+        //     'units' => $units
+        // ]);
+
+
+        $perPage = $request->input('per_page', 5);
+        $units = Unit::paginate($perPage);
+
+        // dd($units);
         return inertia('Units/Index', [
             'units' => $units
         ]);

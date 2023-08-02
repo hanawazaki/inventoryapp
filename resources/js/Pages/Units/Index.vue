@@ -40,7 +40,7 @@
                                 </thead>
                                 <tbody>
                                     <tr
-                                        v-for="(unit, index) in units"
+                                        v-for="(unit, index) in items.data"
                                         :key="index"
                                     >
                                         <td
@@ -61,8 +61,12 @@
                                                         unit.id
                                                     )
                                                 "
-                                                class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80 text-slate-400"
+                                                class="inline-block dark:text-white px-4 py-2.5 mb-0 font-bold text-center align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-normal text-sm ease-in bg-150 hover:-translate-y-px active:opacity-85 bg-x-25 text-slate-700"
                                             >
+                                                <i
+                                                    class="mr-2 fas fa-pencil-alt text-slate-700"
+                                                    aria-hidden="true"
+                                                ></i>
                                                 Edit
                                             </Link>
                                         </td>
@@ -78,9 +82,12 @@
                                                         )
                                                     )
                                                 "
-                                                class="text-sm cursor-pointer font-semibold leading-tight dark:text-white dark:opacity-80 text-slate-400"
+                                                class="relative z-10 inline-block px-4 py-2.5 mb-0 font-bold text-center text-transparent align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-normal text-sm ease-in bg-150 bg-gradient-to-tl from-red-600 to-orange-600 hover:-translate-y-px active:opacity-85 bg-x-25 bg-clip-text"
                                             >
-                                                Delete
+                                                <i
+                                                    class="mr-2 far fa-trash-alt bg-150 bg-gradient-to-tl from-red-600 to-orange-600 bg-x-25 bg-clip-text"
+                                                ></i
+                                                >Delete
                                             </div>
                                         </td>
                                     </tr>
@@ -88,6 +95,29 @@
                             </table>
                         </div>
                     </div>
+                    <nav v-if="items.last_page > 1">
+                        <ul class="pagination">
+                            <li v-if="items.current_page > 1">
+                                <a @click="fetchUnits(items.current_page - 1)"
+                                    >Previous</a
+                                >
+                            </li>
+                            <li
+                                v-for="page in items.last_page"
+                                :key="page"
+                                :class="{
+                                    active: page === items.current_page,
+                                }"
+                            >
+                                <a @click="fetchUnits(page)">{{ page }}</a>
+                            </li>
+                            <li v-if="items.current_page < items.last_page">
+                                <a @click="fetchUnits(items.current_page + 1)"
+                                    >Next</a
+                                >
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
@@ -97,16 +127,29 @@
 <script setup>
 import Authenticated from "../../Layouts/Authenticated/Index.vue";
 import Button from "@/Components/Button.vue";
-import { Link, useForm } from "@inertiajs/vue3";
+import { Link, usePage, router } from "@inertiajs/vue3";
+import { ref, watch } from "vue";
 
-const props = defineProps({
-    units: {
-        type: Array,
-        require: true,
-    },
-});
+const { props } = usePage();
+const items = ref(props.units);
 
-const form = useForm({});
+// const props = defineProps({
+//     units: {
+//         type: Array,
+//         require: true,
+//     },
+// });
+
+watch(
+    () => props,
+    (newItems) => {
+        items.value = newItems;
+    }
+);
+
+function fetchUnits(page) {
+    router.visit(`/units?page=${page}`);
+}
 </script>
 
 <style lang="scss" scoped></style>
