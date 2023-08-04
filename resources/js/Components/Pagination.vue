@@ -39,7 +39,7 @@ const props = defineProps({
     },
 });
 
-console.log("items", props.items);
+// console.log("items", props.items);
 
 const state = reactive({
     currentPage: props.items.current_page,
@@ -49,8 +49,8 @@ const totalPages = computed(() =>
     Math.ceil(props.items.total / props.items.per_page)
 );
 
-console.log("curr page", state.currentPage);
-console.log("total page", totalPages.value);
+// console.log("curr page", state.currentPage);
+// console.log("total page", totalPages.value);
 
 const handleChangePage = (page) => {
     state.currentPage = page;
@@ -61,7 +61,7 @@ const nextPage = () => {
     if (state.currentPage < totalPages.value) {
         state.currentPage++;
         instance.emit("update:currentPage", state.currentPage);
-        console.log("next clicked");
+        // console.log("next clicked");
     }
 };
 
@@ -69,7 +69,7 @@ const prevPage = () => {
     if (state.currentPage > 1) {
         state.currentPage--;
         instance.emit("update:currentPage", state.currentPage);
-        console.log("prev clicked");
+        // console.log("prev clicked");
     }
 };
 
