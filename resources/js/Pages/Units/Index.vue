@@ -25,6 +25,7 @@
                                         type="text"
                                         class="pl-9 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid border-gray-300 dark:bg-slate-850 dark:text-white bg-white bg-clip-padding py-2 pr-3 text-gray-700 transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none focus:transition-shadow"
                                         placeholder="Type here..."
+                                        v-model="search"
                                     />
                                 </div>
                                 <Link :href="route('dashboard.units.create')">
@@ -54,8 +55,8 @@
                                 </thead>
                                 <tbody>
                                     <tr
-                                        v-for="(unit, index) in props.units
-                                            .data"
+                                        v-if="props.units.data.length"
+                                        v-for="(unit, index) in filteredUnits"
                                         :key="index"
                                     >
                                         <td
@@ -88,7 +89,7 @@
                                         <td
                                             class="p-2 align-middle bg-transparent text-center border-b dark:border-white/40 whitespace-nowrap shadow-transparent"
                                         >
-                                            <div
+                                            <button
                                                 @click="deleteData(unit.id)"
                                                 class="relative z-10 inline-block px-4 py-2.5 mb-0 font-bold text-center text-transparent align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-normal text-sm ease-in bg-150 bg-gradient-to-tl from-red-600 to-orange-600 hover:-translate-y-px active:opacity-85 bg-x-25 bg-clip-text"
                                             >
@@ -96,14 +97,23 @@
                                                     class="mr-2 far fa-trash-alt bg-150 bg-gradient-to-tl from-red-600 to-orange-600 bg-x-25 bg-clip-text"
                                                 ></i
                                                 >Delete
-                                            </div>
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    <tr v-else>
+                                        <td colspan="3">
+                                            <h5
+                                                class="text-center font-mono my-5"
+                                            >
+                                                Tidak ada data
+                                            </h5>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-
                     <Pagination
                         :items="props.units"
                         v-model:current-page="props.units.current_page"
@@ -120,23 +130,28 @@ import Authenticated from "../../Layouts/Authenticated/Index.vue";
 import Button from "@/Components/Button.vue";
 import Pagination from "@/Components/Pagination.vue";
 import { Link, usePage, router, useForm } from "@inertiajs/vue3";
-import { ref, watch } from "vue";
+import { ref, watch, reactive, computed } from "vue";
 
 const props = defineProps({
     units: {
-        type: Array,
+        type: Object,
         required: true,
     },
 });
 
-const form = useForm({});
+const search = ref("");
 
-console.log("units", props.units);
-// console.log("items", items);
+const filteredUnits = computed(() => {
+    return props.units.data.filter((unit) =>
+        unit.name.toLowerCase().includes(search.value.toLowerCase())
+    );
+});
 
 const deleteData = (unitId) => {
     if (confirm("are you sure?")) {
-        form.delete(route("dashboard.units.destroy", unitId));
+        router.delete(route("dashboard.units.destroy", unitId), {
+            preserveScroll: true,
+        });
     }
 };
 
