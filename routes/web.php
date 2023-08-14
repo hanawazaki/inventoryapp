@@ -33,7 +33,7 @@ Route::redirect('/', '/login');
 Route::middleware(['auth', 'role:admin'])->name('dashboard.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::resource('units', UnitsController::class);
-    Route::resource('type', TypeController::class);
+    Route::resource('types', TypeController::class);
 });
 
 Route::middleware('auth')->group(function () {

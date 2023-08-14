@@ -16,7 +16,12 @@
 
     <!-- Scripts -->
     @routes
-    @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue","public/assets/js/argon-dashboard-tailwind.js","public/assets/js/perfect-scrollbar.js","public/assets/js/plugins/perfect-scrollbar.min.js","public/assets/js/plugins/chartjs.min.js"])
+    @vite(['resources/js/app.js',
+    "resources/js/Pages/{$page['component']}.vue",
+    "public/assets/js/argon-dashboard-tailwind.js",
+    "public/assets/js/perfect-scrollbar.js",
+    "public/assets/js/plugins/perfect-scrollbar.min.js",
+    "public/assets/js/plugins/chartjs.min.js"])
     @inertiaHead
 </head>
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Type;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 
 class TypeController extends Controller
@@ -9,9 +11,15 @@ class TypeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return inertia('Type/Index');
+        $perPage = $request->input('per_page', 10);
+        $types = Type::latest()->paginate($perPage);
+
+        // dd($types);
+        return inertia('Types/Index', [
+            'types' => $types
+        ]);
     }
 
     /**
@@ -19,7 +27,10 @@ class TypeController extends Controller
      */
     public function create()
     {
-        //
+        $units = Unit::all();
+        return inertia('Types/Create', [
+            'units' => $units
+        ]);
     }
 
     /**
@@ -31,19 +42,13 @@ class TypeController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Type $type)
     {
-        //
+        return inertia('Types/Edit', [
+            'type' => $type
+        ]);
     }
 
     /**
