@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Type\Store;
+use App\Http\Requests\Type\Update;
 use App\Models\Type;
 use App\Models\Unit;
 use Illuminate\Http\Request;
@@ -14,9 +16,10 @@ class TypeController extends Controller
     public function index(Request $request)
     {
         $perPage = $request->input('per_page', 10);
-        $types = Type::latest()->paginate($perPage);
+        $types = Type::with('units')->latest()->paginate($perPage);
 
         // dd($types);
+        // exit();
         return inertia('Types/Index', [
             'types' => $types
         ]);
@@ -36,9 +39,16 @@ class TypeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Store $request)
     {
-        //
+        $data = $request->validated();
+        // dd($data);
+        // exit();
+        Type::create($data);
+
+        return redirect(route('dashboard.types.index'))->with([
+            'message' => 'Data Successfully Created!'
+        ]);
     }
 
     /**
@@ -46,24 +56,35 @@ class TypeController extends Controller
      */
     public function edit(Type $type)
     {
+        $units = Unit::all();
+
         return inertia('Types/Edit', [
-            'type' => $type
+            'types' => $type,
+            'units' => $units,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Update $request, Type $type)
     {
-        //
+        $type->update($request->all());
+
+        return redirect(route('dashboard.types.index'))->with([
+            'message' => 'Data Successfully Created!'
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Type $type)
     {
-        //
+        $type->delete();
+
+        return redirect(route('dashboard.types.index'))->with([
+            'message' => 'data deleted!'
+        ]);
     }
 }

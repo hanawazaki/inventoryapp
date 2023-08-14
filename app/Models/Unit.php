@@ -13,4 +13,9 @@ class Unit extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function type()
+    {
+        return $this->hasMany(Type::class);
+    }
 }

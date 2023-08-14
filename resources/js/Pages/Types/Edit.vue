@@ -8,7 +8,7 @@
                     <div
                         class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent"
                     >
-                        <h6 class="dark:text-white">Edit Unit</h6>
+                        <h6 class="dark:text-white">Edit Types</h6>
                     </div>
                     <div class="flex-auto px-0 pt-0 pb-2">
                         <div class="p-0 overflow-x-auto">
@@ -35,6 +35,35 @@
                                             <InputErrorVue
                                                 :message="form.errors.name"
                                             />
+                                            <div class="mb-4">
+                                                <label
+                                                    for="inputUnitId"
+                                                    class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80"
+                                                    >Unit Id</label
+                                                >
+                                                <!-- <input
+                                                    type="number"
+                                                    name="inputUnitId"
+                                                    v-model="form.unit_id"
+                                                    class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"
+                                                /> -->
+
+                                                <select
+                                                    v-model="form.unit_id"
+                                                    name="inputUnitId"
+                                                    class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"
+                                                >
+                                                    <option
+                                                        v-for="unit in units"
+                                                        :value="unit.id"
+                                                    >
+                                                        {{ unit.name }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <InputError
+                                                :message="form.errors.unit_id"
+                                            />
                                         </div>
                                     </div>
                                     <Button type="submit">Update</Button>
@@ -55,18 +84,24 @@ import { Head, Link, useForm } from "@inertiajs/vue3";
 import { ref } from "vue";
 
 const props = defineProps({
-    unit: {
+    types: {
         type: Object,
+    },
+    units: {
+        type: Array,
     },
 });
 
 const form = useForm({
-    name: props.unit.name,
+    name: props.types.name,
+    unit_id: props.types.unit_id,
 });
+
+console.log(props.types);
 
 const submit = (e) => {
     e.preventDefault();
-    form.put(route("dashboard.units.update", props.unit.id));
+    form.put(route("dashboard.types.update", props.types.id));
 };
 </script>
 

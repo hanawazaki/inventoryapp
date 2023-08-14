@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Unit;
+namespace App\Http\Requests\Type;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Auth;
@@ -23,7 +23,8 @@ class Update extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255'
+            'name' => 'required|string|max:255',
+            'unit_id' => 'required'
         ];
     }
 }
