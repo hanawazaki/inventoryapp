@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TypeController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UnitsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +36,8 @@ Route::middleware(['auth', 'role:admin'])->name('dashboard.')->group(function ()
     Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::resource('units', UnitsController::class);
     Route::resource('types', TypeController::class);
+    Route::resource('categories', CategoriesController::class);
+    Route::resource('products', ProductController::class);
 });
 
 Route::middleware('auth')->group(function () {
