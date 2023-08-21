@@ -2,9 +2,10 @@
 
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TypeController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UnitsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -37,7 +38,8 @@ Route::middleware(['auth', 'role:admin'])->name('dashboard.')->group(function ()
     Route::resource('units', UnitsController::class);
     Route::resource('types', TypeController::class);
     Route::resource('categories', CategoriesController::class);
-    Route::resource('products', ProductController::class);
+    Route::resource('products', ProductsController::class);
+    Route::resource('gallery', GalleryController::class);
 });
 
 Route::middleware('auth')->group(function () {
