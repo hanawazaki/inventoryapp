@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('pn', 50);
-            $table->foreignId("category_id")->constrained();
             $table->string('name', 50);
             $table->integer('quantity');
+            $table->foreignId('type_id')->constrained();
             $table->timestamps();
             $table->softDeletes();
         });

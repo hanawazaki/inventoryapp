@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gallery;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class GalleryController extends Controller
@@ -9,9 +11,16 @@ class GalleryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $perPage = $request->input('per_page', 10);
+        $galleries = Gallery::with('product')->latest()->paginate($perPage);
+
+        // dd($categories);
+        // exit();
+        return inertia('Gallery/Index', [
+            'galleries' => $galleries
+        ]);
     }
 
     /**
@@ -19,7 +28,10 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        //
+        $product = Product::all();
+        return inertia('Gallery/Create', [
+            'product' => $product
+        ]);
     }
 
     /**

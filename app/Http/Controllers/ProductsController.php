@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests\Product\Store;
 use App\Http\Requests\Product\Update;
+use App\Models\Type;
 
 class ProductsController extends Controller
 {
@@ -16,10 +16,14 @@ class ProductsController extends Controller
     public function index(Request $request)
     {
         $perPage = $request->input('per_page', 10);
-        $products = Product::with('category')->latest()->paginate($perPage);
+        $products = Product::with('type')->latest()->paginate($perPage);
+        // $products = Product::find(4);
 
-        // dd($categories);
+        // $unit = $products->unit;
+
+        // dd($products);
         // exit();
+
         return inertia('Products/Index', [
             'products' => $products
         ]);
@@ -30,9 +34,9 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
+        $types = Type::all();
         return inertia('Products/Create', [
-            'categories' => $categories
+            'types' =>  $types
         ]);
     }
 
@@ -56,11 +60,11 @@ class ProductsController extends Controller
      */
     public function edit(Product $product)
     {
-        $categories = Category::all();
+        $types = Type::all();
 
         return inertia('Products/Edit', [
             'product' => $product,
-            'categories' => $categories,
+            'types' =>  $types
         ]);
     }
 

@@ -69,30 +69,44 @@
                                             />
                                             <div class="mb-4">
                                                 <label
-                                                    for="inputCatId"
+                                                    for="inputPrice"
                                                     class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80"
-                                                    >Categories</label
+                                                    >Price</label
+                                                >
+                                                <input
+                                                    type="number"
+                                                    name="inputPrice"
+                                                    v-model="form.price"
+                                                    class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"
+                                                />
+                                            </div>
+                                            <InputError
+                                                :message="form.errors.price"
+                                            />
+                                            <div class="mb-4">
+                                                <label
+                                                    for="inputTypeId"
+                                                    class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80"
+                                                    >Type Id</label
                                                 >
                                                 <select
-                                                    v-model="form.category_id"
-                                                    name="inputCatId"
+                                                    v-model="form.type_id"
+                                                    name="inputTypeId"
                                                     class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"
                                                 >
                                                     <option value="" selected>
                                                         Pilih type
                                                     </option>
                                                     <option
-                                                        v-for="category in categories"
-                                                        :value="category.id"
+                                                        v-for="type in types"
+                                                        :value="type.id"
                                                     >
-                                                        {{ category.name }}
+                                                        {{ type.name }}
                                                     </option>
                                                 </select>
                                             </div>
                                             <InputError
-                                                :message="
-                                                    form.errors.category_id
-                                                "
+                                                :message="form.errors.type_id"
                                             />
                                         </div>
                                     </div>
@@ -117,7 +131,7 @@ const props = defineProps({
     product: {
         type: Object,
     },
-    categories: {
+    types: {
         type: Array,
     },
 });
@@ -127,6 +141,8 @@ const form = useForm({
     category_id: props.product.category_id,
     pn: props.product.pn,
     quantity: props.product.quantity,
+    price: props.product.price,
+    type_id: props.product.type_id,
 });
 
 // console.log(props.types);

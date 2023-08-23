@@ -11,7 +11,7 @@ class Type extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'name', 'unit_id'
+        'name', 'unit_id', 'image'
     ];
 
     public function units()
@@ -19,8 +19,8 @@ class Type extends Model
         return $this->belongsTo(Unit::class, 'unit_id', 'id');
     }
 
-    public function category()
+    public function product()
     {
-        return $this->hasMany(Category::class);
+        return $this->hasMany(Product::class);
     }
 }

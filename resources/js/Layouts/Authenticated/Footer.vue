@@ -8,15 +8,15 @@
                     <div
                         class="text-sm leading-normal text-center text-slate-500 lg:text-left"
                     >
-                        © 2023 made with
-                        <i class="fa fa-heart"></i> by
+                        © 2023
+                        <!-- <i class="fa fa-heart"></i> by -->
                         <a
                             href="https://www.creative-tim.com"
                             class="font-semibold text-slate-700 dark:text-white"
                             target="_blank"
-                            >Creative Tim</a
+                            >SB ENgineering Group</a
                         >
-                        for a better web.
+                        <!-- for a better web. -->
                     </div>
                 </div>
                 <div
@@ -30,7 +30,7 @@
                                 href="https://www.creative-tim.com"
                                 class="block px-4 pt-0 pb-1 text-sm font-normal transition-colors ease-in-out text-slate-500"
                                 target="_blank"
-                                >Creative Tim</a
+                                >SB Engineering group</a
                             >
                         </li>
                         <li class="nav-item">

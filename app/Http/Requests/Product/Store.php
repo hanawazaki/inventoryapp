@@ -26,7 +26,8 @@ class Store extends FormRequest
             'pn' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'quantity' => 'required|integer',
-            'category_id' => 'required'
+            'price' => 'required|integer',
+            'type_id' => 'required|integer'
         ];
     }
 }

@@ -14,15 +14,15 @@ class UnitTableSeeder extends Seeder
     public function run(): void
     {
         $units = [
-            ['name' => 'unit 001'],
+            ['name' => 'Komatsu'],
             [
-                'name' => 'unit 002'
+                'name' => 'Kobelco'
             ], [
-                'name' => 'unit 003'
+                'name' => 'Caterpillar'
             ], [
-                'name' => 'unit 004'
+                'name' => 'Hitachi'
             ], [
-                'name' => 'unit 005'
+                'name' => 'Hyundai'
             ]
         ];
 
