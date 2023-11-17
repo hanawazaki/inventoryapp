@@ -8,7 +8,7 @@
                     <div
                         class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent"
                     >
-                        <h6 class="dark:text-white">Edit Parts Type</h6>
+                        <h6 class="dark:text-white">Edit Vehicle Types</h6>
                     </div>
                     <div class="flex-auto px-0 pt-0 pb-2">
                         <div class="p-0 overflow-x-auto">
@@ -23,7 +23,7 @@
                                                 <label
                                                     for="inputName"
                                                     class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80"
-                                                    >Parts name</label
+                                                    >Name</label
                                                 >
                                                 <input
                                                     type="text"
@@ -39,7 +39,7 @@
                                                 <label
                                                     for="inputUnitId"
                                                     class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80"
-                                                    >Vehicle</label
+                                                    >Unit Name</label
                                                 >
                                                 <!-- <input
                                                     type="number"
@@ -49,17 +49,15 @@
                                                 /> -->
 
                                                 <select
-                                                    v-model="
-                                                        form.vehicle_type_id
-                                                    "
+                                                    v-model="form.unit_id"
                                                     name="inputUnitId"
                                                     class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"
                                                 >
                                                     <option
-                                                        v-for="vehicle in vehicle_type"
-                                                        :value="vehicle.id"
+                                                        v-for="unit in units"
+                                                        :value="unit.id"
                                                     >
-                                                        {{ vehicle.name }}
+                                                        {{ unit.name }}
                                                     </option>
                                                 </select>
                                             </div>
@@ -86,24 +84,23 @@ import { Head, Link, useForm } from "@inertiajs/vue3";
 import { ref } from "vue";
 
 const props = defineProps({
-    types: {
+    vehicle_type: {
         type: Object,
     },
-    vehicle_type: {
+    units: {
         type: Array,
     },
 });
+console.log(props.vehicle_type);
 
 const form = useForm({
-    name: props.types.name,
-    vehicle_type_id: props.types.vehicle_type_id,
+    name: props.vehicle_type.name,
+    unit_id: props.vehicle_type.unit_id,
 });
-
-console.log(props.types);
 
 const submit = (e) => {
     e.preventDefault();
-    form.put(route("dashboard.types.update", props.types.id));
+    form.put(route("dashboard.vehicle_types.update", props.vehicle_type.id));
 };
 </script>
 

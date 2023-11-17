@@ -15,9 +15,9 @@ class Unit extends Model
         'name', 'image'
     ];
 
-    public function type()
+    public function vehicletype()
     {
-        return $this->hasMany(Type::class);
+        return $this->hasMany(VehicleType::class);
     }
 
     // public function product(): HasManyThrough

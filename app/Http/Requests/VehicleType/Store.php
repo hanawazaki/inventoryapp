@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Type;
+namespace App\Http\Requests\VehicleType;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
-class Update extends FormRequest
+class Store extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class Update extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'vehicle_type_id' => 'required'
+            'unit_id' => 'required'
         ];
     }
 }

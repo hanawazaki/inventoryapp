@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('pn', 50);
+            $table->string('part_number', 50);
             $table->string('name', 50);
+            $table->string('material', 50)->nullable();
+            $table->text('description')->nullable();
             $table->integer('quantity');
             $table->foreignId('type_id')->constrained();
+            $table->integer('is_featured');
+            $table->integer('is_best_seller');
             $table->timestamps();
             $table->softDeletes();
         });

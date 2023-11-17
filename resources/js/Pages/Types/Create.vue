@@ -39,7 +39,7 @@
                                                 <label
                                                     for="inputUnitId"
                                                     class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80"
-                                                    >Unit Id</label
+                                                    >Vehicle</label
                                                 >
                                                 <!-- <input
                                                     type="number"
@@ -49,20 +49,24 @@
                                                 /> -->
 
                                                 <select
-                                                    v-model="form.unit_id"
+                                                    v-model="
+                                                        form.vehicle_type_id
+                                                    "
                                                     name="inputUnitId"
                                                     class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"
                                                 >
                                                     <option
-                                                        v-for="unit in units"
-                                                        :value="unit.id"
+                                                        v-for="vehicle in vehicle_type"
+                                                        :value="vehicle.id"
                                                     >
-                                                        {{ unit.name }}
+                                                        {{ vehicle.name }}
                                                     </option>
                                                 </select>
                                             </div>
                                             <InputError
-                                                :message="form.errors.unit_id"
+                                                :message="
+                                                    form.errors.vehicle_type_id
+                                                "
                                             />
                                         </div>
                                     </div>
@@ -85,7 +89,7 @@ import { Head, Link, useForm } from "@inertiajs/vue3";
 
 const form = useForm({
     name: "",
-    unit_id: 1,
+    vehicle_type_id: 1,
 });
 
 const submit = (e) => {
@@ -94,7 +98,7 @@ const submit = (e) => {
 };
 
 const props = defineProps({
-    units: {
+    vehicle_type: {
         type: Object,
         required: true,
     },

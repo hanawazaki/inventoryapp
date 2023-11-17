@@ -13,7 +13,7 @@ class Product extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'name', 'pn', 'type_id', 'quantity', 'price'
+        'part_number', 'name', 'material', 'description', 'quantity', 'type_id', 'is_best_seller', 'is_featured'
     ];
 
     public function type()
@@ -34,5 +34,10 @@ class Product extends Model
     public function unit()
     {
         return $this->type->unit;
+    }
+
+    public function variant()
+    {
+        return $this->hasMany(Variant::class);
     }
 }

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->boolean('is_default')->default(false);
             $table->string('thumb')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

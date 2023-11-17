@@ -24,7 +24,7 @@ class Store extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'unit_id' => 'required'
+            'vehicle_type_id' => 'required'
         ];
     }
 }

@@ -6,21 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Type extends Model
+class Variant extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'name', 'vehicle_type_id', 'image'
+        'product_id', 'variant', 'price'
     ];
-
-    public function vehicletype()
-    {
-        return $this->belongsTo(VehicleType::class, 'vehicle_type_id', 'id');
-    }
 
     public function product()
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 }

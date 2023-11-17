@@ -16,13 +16,9 @@ class UnitTableSeeder extends Seeder
         $units = [
             ['name' => 'Komatsu'],
             [
-                'name' => 'Kobelco'
+                'name' => 'Toyota'
             ], [
-                'name' => 'Caterpillar'
-            ], [
-                'name' => 'Hitachi'
-            ], [
-                'name' => 'Hyundai'
+                'name' => 'Hino'
             ]
         ];
 

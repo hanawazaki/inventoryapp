@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('vehicle_types', function (Blueprint $table) {
-            $table->string('image')->nullable();
+        Schema::create('vehicle_types', function (Blueprint $table) {
+            $table->id();
+            $table->string('name', 50);
+            $table->foreignId('unit_id')->constrained();
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('vehicle_types', function (Blueprint $table) {
-            $table->dropColumn('image');
-        });
+        Schema::dropIfExists('vehicle_types');
     }
 };

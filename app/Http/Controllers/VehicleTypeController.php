@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Type\Store;
-use App\Http\Requests\Type\Update;
-use App\Models\Type;
 use App\Models\Unit;
 use App\Models\VehicleType;
 use Illuminate\Http\Request;
+use App\Http\Requests\VehicleType\Store;
+use App\Http\Requests\VehicleType\Update;
 
-class TypeController extends Controller
+class VehicleTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +16,9 @@ class TypeController extends Controller
     public function index(Request $request)
     {
         $perPage = $request->input('per_page', 10);
-        $types = Type::with('vehicletype')->latest()->paginate($perPage);
+        $types = VehicleType::with('units')->latest()->paginate($perPage);
 
-        return inertia('Types/Index', [
+        return inertia('VehicleType/Index', [
             'types' => $types
         ]);
     }
@@ -29,9 +28,9 @@ class TypeController extends Controller
      */
     public function create()
     {
-        $vehicle_type = VehicleType::all();
-        return inertia('Types/Create', [
-            'vehicle_type' => $vehicle_type
+        $units = Unit::all();
+        return inertia('VehicleType/Create', [
+            'units' => $units
         ]);
     }
 
@@ -41,9 +40,9 @@ class TypeController extends Controller
     public function store(Store $request)
     {
         $data = $request->validated();
-        Type::create($data);
+        VehicleType::create($data);
 
-        return redirect(route('dashboard.types.index'))->with([
+        return redirect(route('dashboard.vehicle_types.index'))->with([
             'message' => 'Data Successfully Created!'
         ]);
     }
@@ -51,24 +50,24 @@ class TypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Type $type)
+    public function edit(VehicleType $vehicle_type)
     {
-        $vehicle_type = VehicleType::all();
+        $units = Unit::all();
 
-        return inertia('Types/Edit', [
-            'types' => $type,
+        return inertia('VehicleType/Edit', [
             'vehicle_type' => $vehicle_type,
+            'units' => $units,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Update $request, Type $type)
+    public function update(Update $request, VehicleType $vehicle_type)
     {
-        $type->update($request->all());
+        $vehicle_type->update($request->all());
 
-        return redirect(route('dashboard.types.index'))->with([
+        return redirect(route('dashboard.vehicle_types.index'))->with([
             'message' => 'Data Successfully Updated!'
         ]);
     }
@@ -76,11 +75,11 @@ class TypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Type $type)
+    public function destroy(VehicleType $vehicle_type)
     {
-        $type->delete();
+        $vehicle_type->delete();
 
-        return redirect(route('dashboard.types.index'))->with([
+        return redirect(route('dashboard.vehicle_types.index'))->with([
             'message' => 'data deleted!'
         ]);
     }

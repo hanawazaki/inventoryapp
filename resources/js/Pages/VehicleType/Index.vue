@@ -8,7 +8,7 @@
                     <div
                         class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent"
                     >
-                        <h6 class="dark:text-white">Parts type table</h6>
+                        <h6 class="dark:text-white">Types table</h6>
                     </div>
                     <div class="flex-auto px-0 pt-0 pb-2">
                         <div class="p-6 overflow-x-auto">
@@ -28,7 +28,11 @@
                                         v-model="search"
                                     />
                                 </div>
-                                <Link :href="route('dashboard.types.create')">
+                                <Link
+                                    :href="
+                                        route('dashboard.vehicle_types.create')
+                                    "
+                                >
                                     <Button type="button" variant="bg-blue-500"
                                         >Create new</Button
                                     >
@@ -42,12 +46,12 @@
                                         <th
                                             class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70"
                                         >
-                                            Parts Type
+                                            Type Name
                                         </th>
                                         <th
                                             class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70"
                                         >
-                                            Vehicle Name
+                                            Unit Name
                                         </th>
                                         <th
                                             colspan="2"
@@ -77,9 +81,7 @@
                                         >
                                             <span
                                                 class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80 text-slate-400"
-                                                >{{
-                                                    type.vehicletype.name
-                                                }}</span
+                                                >{{ type.units.name }}</span
                                             >
                                         </td>
                                         <td
@@ -88,7 +90,7 @@
                                             <Link
                                                 :href="
                                                     route(
-                                                        'dashboard.types.edit',
+                                                        'dashboard.vehicle_types.edit',
                                                         type.id
                                                     )
                                                 "
@@ -157,14 +159,14 @@ const props = defineProps({
 const search = ref("");
 
 const filteredTypes = computed(() => {
-    return props.types.data.filter((vehicletype) =>
-        vehicletype.name.toLowerCase().includes(search.value.toLowerCase())
+    return props.types.data.filter((unit) =>
+        unit.name.toLowerCase().includes(search.value.toLowerCase())
     );
 });
 
 const deleteData = (typeId) => {
     if (confirm("are you sure?")) {
-        router.delete(route("dashboard.types.destroy", typeId), {
+        router.delete(route("dashboard.vehicle_types.destroy", typeId), {
             preserveScroll: true,
         });
     }

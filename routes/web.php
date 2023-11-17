@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UnitsController;
+use App\Http\Controllers\VehicleTypeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -37,6 +38,7 @@ Route::middleware(['auth', 'role:admin'])->name('dashboard.')->group(function ()
     Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::resource('units', UnitsController::class);
     Route::resource('types', TypeController::class);
+    Route::resource('vehicle_types', VehicleTypeController::class);
     Route::resource('categories', CategoriesController::class);
     Route::resource('products', ProductsController::class);
     Route::resource('gallery', GalleryController::class);
