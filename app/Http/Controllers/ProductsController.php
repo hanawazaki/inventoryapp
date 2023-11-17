@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Product\Store;
 use App\Http\Requests\Product\Update;
 use App\Models\Type;
+use App\Models\Variant;
 
 class ProductsController extends Controller
 {
@@ -16,10 +17,9 @@ class ProductsController extends Controller
     public function index(Request $request)
     {
         $perPage = $request->input('per_page', 10);
-        $products = Product::with('type')->latest()->paginate($perPage);
-        // $products = Product::find(4);
+        $products = Product::with(['variant', 'type'])->latest()->paginate($perPage);
+        // $products = Variant::with('product')->latest()->paginate($perPage);
 
-        // $unit = $products->unit;
 
         // dd($products);
         // exit();
@@ -46,13 +46,13 @@ class ProductsController extends Controller
     public function store(Store $request)
     {
         $data = $request->validated();
-        // dd($data);
-        // exit();
-        Product::create($data);
+        dd($data);
+        exit();
+        // Product::create($data);
 
-        return redirect(route('dashboard.products.index'))->with([
-            'message' => 'Data Successfully Created!'
-        ]);
+        // return redirect(route('dashboard.products.index'))->with([
+        //     'message' => 'Data Successfully Created!'
+        // ]);
     }
 
     /**

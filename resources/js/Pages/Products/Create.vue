@@ -19,6 +19,7 @@
                                         <div
                                             class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0"
                                         >
+                                            <!-- NAME INPUT -->
                                             <div class="mb-4">
                                                 <label
                                                     for="inputName"
@@ -35,6 +36,8 @@
                                             <InputError
                                                 :message="form.errors.name"
                                             />
+
+                                            <!-- PN INPUT -->
                                             <div class="mb-4">
                                                 <label
                                                     for="inputPN"
@@ -51,6 +54,8 @@
                                             <InputError
                                                 :message="form.errors.pn"
                                             />
+
+                                            <!-- QTY INPUT -->
                                             <div class="mb-4">
                                                 <label
                                                     for="inputQty"
@@ -67,6 +72,8 @@
                                             <InputError
                                                 :message="form.errors.quantity"
                                             />
+
+                                            <!-- PRICE INPUT -->
                                             <div class="mb-4">
                                                 <label
                                                     for="inputPrice"
@@ -83,6 +90,8 @@
                                             <InputError
                                                 :message="form.errors.price"
                                             />
+
+                                            <!-- TYPE INPUT -->
                                             <div class="mb-4">
                                                 <label
                                                     for="inputTypeId"
@@ -108,6 +117,45 @@
                                             <InputError
                                                 :message="form.errors.type_id"
                                             />
+
+                                            <!-- MATERIAL INPUT  -->
+                                            <div class="mb-4">
+                                                <label
+                                                    for="inputMaterial"
+                                                    class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80"
+                                                    >Material</label
+                                                >
+                                                <input
+                                                    type="text"
+                                                    name="inputMaterial"
+                                                    v-model="form.material"
+                                                    class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"
+                                                />
+                                            </div>
+                                            <InputError
+                                                :message="form.errors.material"
+                                            />
+
+                                            <!-- DESC INPUT  -->
+                                            <div class="mb-4">
+                                                <label
+                                                    for="inputDesc"
+                                                    class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80"
+                                                    >Description</label
+                                                >
+                                                <textarea
+                                                    cols="10"
+                                                    rows="10"
+                                                    name="inputDesc"
+                                                    v-model="form.description"
+                                                    class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"
+                                                ></textarea>
+                                            </div>
+                                            <InputError
+                                                :message="
+                                                    form.errors.description
+                                                "
+                                            />
                                         </div>
                                     </div>
                                     <Button type="submit">Save</Button>
@@ -131,8 +179,16 @@ const form = useForm({
     name: "",
     type_id: "",
     quantity: 0,
-    pn: "",
-    price: 0,
+    part_number: "",
+    is_featured: 0,
+    is_best_seller: 0,
+    material: "",
+    variants: [
+        {
+            variant: "",
+            price: 0,
+        },
+    ],
 });
 
 const submit = (e) => {

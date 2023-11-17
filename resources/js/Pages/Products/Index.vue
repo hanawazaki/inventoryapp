@@ -44,27 +44,28 @@
                                         <th
                                             class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70"
                                         >
-                                            PN
+                                            Gallery
+                                        </th>
+                                        <th
+                                            class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70"
+                                        >
+                                            Part Number
                                         </th>
                                         <th
                                             class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70"
                                         >
                                             Product Name
                                         </th>
-                                        <!-- <th
+                                        <th
                                             class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70"
                                         >
                                             Quantity
-                                        </th> -->
+                                        </th>
+
                                         <th
                                             class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70"
                                         >
                                             Type
-                                        </th>
-                                        <th
-                                            class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70"
-                                        >
-                                            Price
                                         </th>
                                         <th
                                             colspan="2"
@@ -86,7 +87,15 @@
                                         >
                                             <span
                                                 class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80 text-slate-400"
-                                                >{{ product.pn }}</span
+                                                >{{ product.image }}</span
+                                            >
+                                        </td>
+                                        <td
+                                            class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent"
+                                        >
+                                            <span
+                                                class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80 text-slate-400"
+                                                >{{ product.part_number }}</span
                                             >
                                         </td>
                                         <td
@@ -97,7 +106,14 @@
                                                 >{{ product.name }}</span
                                             >
                                         </td>
-
+                                        <td
+                                            class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent"
+                                        >
+                                            <span
+                                                class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80 text-slate-400"
+                                                >{{ product.quantity }}</span
+                                            >
+                                        </td>
                                         <td
                                             class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent"
                                         >
@@ -106,40 +122,25 @@
                                                 >{{ product.type.name }}</span
                                             >
                                         </td>
-                                        <!-- <td
-                                            class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent"
-                                        >
-                                            <span
-                                                class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80 text-slate-400"
-                                            >
-                                                {{ product.type.unit }}</span
-                                            >
-                                        </td> -->
-                                        <td
-                                            class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent"
-                                        >
-                                            <span
-                                                class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80 text-slate-400"
-                                                >Rp {{ product.price }}</span
-                                            >
-                                        </td>
+
+                                        <!-- gallery -->
                                         <td
                                             class="p-2 align-middle bg-transparent text-center border-b dark:border-white/40 whitespace-nowrap shadow-transparent"
                                         >
                                             <Link
                                                 :href="
                                                     route(
-                                                        'dashboard.products.edit',
+                                                        'dashboard.products.show',
                                                         product.id
                                                     )
                                                 "
                                                 class="inline-block dark:text-white px-4 py-2.5 mb-0 font-bold text-center align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-normal text-sm ease-in bg-150 hover:-translate-y-px active:opacity-85 bg-x-25 text-slate-700"
                                             >
                                                 <i
-                                                    class="mr-2 fas fa-image text-slate-700"
+                                                    class="mr-2 fas fa-eye text-slate-700"
                                                     aria-hidden="true"
                                                 ></i>
-                                                Gallery
+                                                View
                                             </Link>
                                             <Link
                                                 :href="
