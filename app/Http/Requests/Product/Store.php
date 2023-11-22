@@ -23,11 +23,17 @@ class Store extends FormRequest
     public function rules(): array
     {
         return [
-            'pn' => 'required|string|max:255',
+            'part_number' => 'required|string|max:255',
             'name' => 'required|string|max:255',
+            'material' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
             'quantity' => 'required|integer',
-            'price' => 'required|integer',
-            'type_id' => 'required|integer'
+            'type_id' => 'required|integer',
+            'is_featured' => 'required|integer',
+            'is_best_seller' => 'required|integer',
+            'variants' => 'required|array|min:1',
+            'variants.*.variant' => 'required|string|max:255',
+            'variants.*.price' => 'required|numeric',
         ];
     }
 }

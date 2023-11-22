@@ -8,6 +8,7 @@ use App\Http\Requests\Product\Store;
 use App\Http\Requests\Product\Update;
 use App\Models\Type;
 use App\Models\Variant;
+use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
@@ -46,13 +47,23 @@ class ProductsController extends Controller
     public function store(Store $request)
     {
         $data = $request->validated();
-        dd($data);
-        exit();
-        // Product::create($data);
+        $product = Product::create($data);
 
-        // return redirect(route('dashboard.products.index'))->with([
-        //     'message' => 'Data Successfully Created!'
-        // ]);
+        if ($product) {
+            $variantsData = $request->input('variants', []);
+
+            foreach ($variantsData as $variantData) {
+                Variant::create([
+                    'product_id' => $product->id,
+                    'variant' => $variantData['variant'],
+                    'price' => $variantData['price'],
+                ]);
+            }
+        }
+
+        return redirect(route('dashboard.products.index'))->with([
+            'message' => 'Data Successfully Created!'
+        ]);
     }
 
     /**
@@ -61,9 +72,11 @@ class ProductsController extends Controller
     public function edit(Product $product)
     {
         $types = Type::all();
+        $variants = Variant::select('price', 'variant')->where('product_id', $product->id)->get();
 
         return inertia('Products/Edit', [
             'product' => $product,
+            'variants' => $variants,
             'types' =>  $types
         ]);
     }
@@ -74,7 +87,18 @@ class ProductsController extends Controller
     public function update(Update $request, Product $product)
     {
         // dd($request->all());
-        $product->update($request->all());
+        // exit();
+
+        $product->update($request->validated());
+
+        // if ($update_product) {
+        $variants = $request->variants;
+
+        // dd($variants);
+        // exit();
+
+
+        // }
 
         return redirect(route('dashboard.products.index'))->with([
             'message' => 'Data Successfully Created!'

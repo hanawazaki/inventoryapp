@@ -19,6 +19,7 @@
                                         <div
                                             class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0"
                                         >
+                                            <!-- NAME INPUT -->
                                             <div class="mb-4">
                                                 <label
                                                     for="inputName"
@@ -35,6 +36,8 @@
                                             <InputError
                                                 :message="form.errors.name"
                                             />
+
+                                            <!-- PN INPUT -->
                                             <div class="mb-4">
                                                 <label
                                                     for="inputPN"
@@ -44,13 +47,17 @@
                                                 <input
                                                     type="text"
                                                     name="inputPN"
-                                                    v-model="form.pn"
+                                                    v-model="form.part_number"
                                                     class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"
                                                 />
                                             </div>
                                             <InputError
-                                                :message="form.errors.pn"
+                                                :message="
+                                                    form.errors.part_number
+                                                "
                                             />
+
+                                            <!-- QTY INPUT -->
                                             <div class="mb-4">
                                                 <label
                                                     for="inputQty"
@@ -67,27 +74,13 @@
                                             <InputError
                                                 :message="form.errors.quantity"
                                             />
-                                            <div class="mb-4">
-                                                <label
-                                                    for="inputPrice"
-                                                    class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80"
-                                                    >Price</label
-                                                >
-                                                <input
-                                                    type="number"
-                                                    name="inputPrice"
-                                                    v-model="form.price"
-                                                    class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"
-                                                />
-                                            </div>
-                                            <InputError
-                                                :message="form.errors.price"
-                                            />
+
+                                            <!-- TYPE INPUT -->
                                             <div class="mb-4">
                                                 <label
                                                     for="inputTypeId"
                                                     class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80"
-                                                    >Type Id</label
+                                                    >Type</label
                                                 >
                                                 <select
                                                     v-model="form.type_id"
@@ -108,9 +101,194 @@
                                             <InputError
                                                 :message="form.errors.type_id"
                                             />
+
+                                            <!-- featured INPUT -->
+                                            <div class="mb-4">
+                                                <label
+                                                    for="inputFeatured"
+                                                    class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80"
+                                                    >Featured</label
+                                                >
+                                                <select
+                                                    v-model="form.is_featured"
+                                                    name="inputFeatured"
+                                                    class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"
+                                                >
+                                                    <option value="" selected>
+                                                        Pilih
+                                                    </option>
+                                                    <option value="0">
+                                                        No
+                                                    </option>
+                                                    <option value="1">
+                                                        Yes
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <InputError
+                                                :message="
+                                                    form.errors.is_featured
+                                                "
+                                            />
+
+                                            <!-- best seller INPUT -->
+                                            <div class="mb-4">
+                                                <label
+                                                    for="inputBestSeller"
+                                                    class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80"
+                                                    >Best Seller</label
+                                                >
+                                                <select
+                                                    v-model="
+                                                        form.is_best_seller
+                                                    "
+                                                    name="inputBestSeller"
+                                                    class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"
+                                                >
+                                                    <option value="" selected>
+                                                        Pilih
+                                                    </option>
+                                                    <option value="0">
+                                                        No
+                                                    </option>
+                                                    <option value="1">
+                                                        Yes
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <InputError
+                                                :message="
+                                                    form.errors.is_best_seller
+                                                "
+                                            />
+
+                                            <!-- MATERIAL INPUT  -->
+                                            <div class="mb-4">
+                                                <label
+                                                    for="inputMaterial"
+                                                    class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80"
+                                                    >Material</label
+                                                >
+                                                <input
+                                                    type="text"
+                                                    name="inputMaterial"
+                                                    v-model="form.material"
+                                                    class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"
+                                                />
+                                            </div>
+                                            <InputError
+                                                :message="form.errors.material"
+                                            />
+
+                                            <!--VARIANTS  -->
+                                            <div
+                                                class="border rounded-lg p-4 mb-4"
+                                                v-for="(
+                                                    variant, index
+                                                ) in form.variants"
+                                                :key="index"
+                                            >
+                                                <!-- VARIANT INPUT  -->
+                                                <div class="mb-4">
+                                                    <label
+                                                        for="inputVariant"
+                                                        class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80"
+                                                        >Variant
+                                                        {{ index + 1 }}</label
+                                                    >
+                                                    <input
+                                                        type="text"
+                                                        name="inputVariant"
+                                                        v-model="
+                                                            form.variants[index]
+                                                                .variant
+                                                        "
+                                                        class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"
+                                                    />
+                                                </div>
+                                                <!-- <InputError
+                                                    :message="
+                                                        form.errors.variants[
+                                                            index
+                                                        ].variant
+                                                    "
+                                                /> -->
+
+                                                <!-- PRICE INPUT -->
+                                                <div class="mb-4">
+                                                    <label
+                                                        for="inputPrice"
+                                                        class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80"
+                                                        >Price</label
+                                                    >
+                                                    <input
+                                                        type="number"
+                                                        name="inputPrice"
+                                                        class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"
+                                                        v-model="
+                                                            form.variants[index]
+                                                                .price
+                                                        "
+                                                    />
+                                                </div>
+                                                <!-- <InputError :message="form.errors.price" /> -->
+
+                                                <InputError
+                                                    v-for="(
+                                                        variant, index
+                                                    ) in form.errors.variants"
+                                                    :key="index"
+                                                    :message="variant.variant"
+                                                />
+                                            </div>
+                                            <div
+                                                class="flex flex-row justify-between"
+                                            >
+                                                <button
+                                                    class="px-4 py-2 rounded-md bg-black text-white"
+                                                    type="button"
+                                                    @click="addVariant"
+                                                >
+                                                    Tambah Variant
+                                                </button>
+
+                                                <button
+                                                    v-if="
+                                                        form.variants.length > 1
+                                                    "
+                                                    class="px-4 py-2 rounded-md bg-black text-white"
+                                                    type="button"
+                                                    @click="
+                                                        () => removeVariant()
+                                                    "
+                                                >
+                                                    remove Variant
+                                                </button>
+                                            </div>
+
+                                            <!-- DESC INPUT  -->
+                                            <div class="mb-4">
+                                                <label
+                                                    for="inputDesc"
+                                                    class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80"
+                                                    >Description</label
+                                                >
+                                                <textarea
+                                                    cols="10"
+                                                    rows="10"
+                                                    name="inputDesc"
+                                                    v-model="form.description"
+                                                    class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"
+                                                ></textarea>
+                                            </div>
+                                            <InputError
+                                                :message="
+                                                    form.errors.description
+                                                "
+                                            />
                                         </div>
                                     </div>
-                                    <Button type="submit">Update</Button>
+                                    <Button type="submit">Save</Button>
                                 </div>
                             </form>
                         </div>
@@ -131,6 +309,9 @@ const props = defineProps({
     product: {
         type: Object,
     },
+    variants: {
+        type: Array,
+    },
     types: {
         type: Array,
     },
@@ -139,17 +320,31 @@ const props = defineProps({
 const form = useForm({
     name: props.product.name,
     category_id: props.product.category_id,
-    pn: props.product.pn,
+    part_number: props.product.part_number,
     quantity: props.product.quantity,
-    price: props.product.price,
     type_id: props.product.type_id,
+    is_featured: props.product.is_featured,
+    is_best_seller: props.product.is_best_seller,
+    material: props.product.material,
+    description: props.product.description,
+    variants: props.variants,
 });
 
-// console.log(props.types);
+// console.log(form);
 
 const submit = (e) => {
     e.preventDefault();
     form.put(route("dashboard.products.update", props.product.id));
+};
+
+const addVariant = () => {
+    form.variants.push({ variant: "", price: 0 });
+    console.log("variants", form.variants);
+};
+
+const removeVariant = (i) => {
+    form.variants.splice(i, 1);
+    console.log("remove", i);
 };
 </script>
 
